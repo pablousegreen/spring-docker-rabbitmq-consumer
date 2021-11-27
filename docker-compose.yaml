@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  spring-rabbitmq:
+    image: spring-rabbitmq:v100
+    restart: unless-stopped
+    build: .
+    ports:
+      - 9001:9001
+    environment:
+      spring.rabbitmq.addresses: rabbitmq
+    links:
+      - rabbitmq
+  spring-rabbitmq-consumer:
+    image: spring-rabbitmq-consumer:v100
+    restart: unless-stopped
+    build: .
+    ports:
+      - 9002:9002
+    environment:
+      spring.rabbitmq.addresses: rabbitmq
+    links:
+      - rabbitmq
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    restart: unless-stopped
+    ports:
+      - "5672:5672" #JMS Port
+      - "15672:15672" #Management Port - default user:pass = guest:guest
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
