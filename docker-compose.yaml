@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  spring-rabbitmq:
+  spring-rabbitmq:   #Producer
     image: spring-rabbitmq:v100
     restart: unless-stopped
     build: .
@@ -11,7 +11,7 @@ services:
       spring.rabbitmq.addresses: rabbitmq
     links:
       - rabbitmq
-  spring-rabbitmq-consumer:
+  spring-rabbitmq-consumer:   #Consumer
     image: spring-rabbitmq-consumer:v100
     restart: unless-stopped
     build: .
@@ -19,8 +19,12 @@ services:
       - 9002:9002
     environment:
       spring.rabbitmq.addresses: rabbitmq
+      spring.data.mongodb.host: mongodb
+      mongodb.primary.host: mongodb
     links:
       - rabbitmq
+    depends_on:
+      - mongodb
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3-management
@@ -34,3 +38,18 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  mongodb:
+    image: mongo:5.0
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+      #basicAuth credentials are "admin:pass", it is recommended you change this in your config.jsenvironment:
+      #environment:
+      #- MONGO_INITDB_ROOT_USERNAME=admin
+      #- MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      #- mongo-data:/data/db
+      - ./Users/pablogonzalez/mongotmp/data/db:/data/db
+volumes:
+  mongo-data:
+    driver: local

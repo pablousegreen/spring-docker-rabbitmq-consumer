@@ -1,6 +1,6 @@
 package com.livecommerce.mq;
 
-import com.livecommerce.dto.Request;
+import com.livecommerce.local.dto.RequestLocal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomMessage {
+public class CustomLocalMessage {
 
     private String messageId;
-    private Request message;
+    private RequestLocal message;
     private Date messageDate;
 
 }

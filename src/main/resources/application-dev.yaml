@@ -1,0 +1,21 @@
+server:
+  port: 9002
+    #spring.rabbitmq.addresses = localhost:5672
+spring:
+  rabbitmq:
+    addresses: rabbitmq:5672
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: GrandStoreDB
+      database2: GrandStoreDB
+
+      db1:
+        uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database}
+      db2:
+        uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database2}
