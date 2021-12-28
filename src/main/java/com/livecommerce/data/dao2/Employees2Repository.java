@@ -1,12 +1,11 @@
-package com.livecommerce.data.dao;
+package com.livecommerce.data.dao2;
 
 import com.livecommerce.model.Employees;
+import com.livecommerce.model2.Employees2;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface EmployeesRepository extends MongoRepository<Employees, Integer> {
+public interface Employees2Repository extends MongoRepository<Employees2, Integer> {
 
 }

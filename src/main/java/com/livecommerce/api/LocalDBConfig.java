@@ -15,12 +15,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactoryRef", basePackages = {"com.livecommerce.local.data.dao"})
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactoryRef", basePackages = {"com.livecommerce.local.data.dao"})
 public class LocalDBConfig {
 
-    @Bean(name="localdatasource")
+    /*@Bean(name="localdatasource")
     @ConfigurationProperties(prefix = "spring.local.datasource")
     public DataSource dataSource(){
         return DataSourceBuilder.create().build();
@@ -32,5 +32,5 @@ public class LocalDBConfig {
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return builder.dataSource(dataSource).packages("com.livecommerce.local.model")
                 .persistenceUnit("Employees").build();
-    }
+    }*/
 }

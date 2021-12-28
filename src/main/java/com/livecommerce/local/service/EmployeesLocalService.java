@@ -2,7 +2,7 @@ package com.livecommerce.local.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.livecommerce.local.data.dao.EmployeesRepository;
+import com.livecommerce.local.data.dao.EmployeesLocalRepository;
 import com.livecommerce.local.dto.RequestLocal;
 import com.livecommerce.local.dto.ResponseLocal;
 import com.livecommerce.local.model.EmployeesLocal;
@@ -17,7 +17,11 @@ import java.util.Optional;
 @Service
 public class EmployeesLocalService {
     @Autowired
-    private EmployeesRepository employeeRepository;
+    private EmployeesLocalRepository employeeRepository;
+
+    /*public EmployeesLocalService(EmployeesLocalRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }*/
 
     public Either<ResponseLocal, List<EmployeesLocal>> postingEmployees(RequestLocal input) {
         ResponseLocal response = new ResponseLocal();

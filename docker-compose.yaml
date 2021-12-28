@@ -20,7 +20,7 @@ services:
     environment:
       spring.rabbitmq.addresses: rabbitmq
       spring.data.mongodb.host: mongodb
-      mongodb.primary.host: mongodb
+      #mongodb.primary.host: mongodb
     links:
       - rabbitmq
     depends_on:

@@ -21,6 +21,10 @@ public class EmployeesService {
     @Autowired
     private EmployeesRepository employeeRepository;
 
+    /*public EmployeesService(EmployeesRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }*/
+
     public Either<Response, List<Employees>> postingEmployees(Request input){
         Response response = new Response();
         try{

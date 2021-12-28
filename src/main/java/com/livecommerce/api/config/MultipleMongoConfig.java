@@ -9,18 +9,21 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
+@EnableMongoRepositories(basePackages = {"com.livecommerce.data.dao"},
+        mongoTemplateRef = Db1Config.MONGO_TEMPLATE)
 public class MultipleMongoConfig {
 
     @Primary
-    @Bean(name = "db1Properties")
+    @Bean
     @ConfigurationProperties(prefix = "spring.data.mongodb.db1")
     public MongoProperties getDb1Props() throws Exception {
         return new MongoProperties();
     }
 
-    @Bean(name = "db2Properties")
+    @Bean
     @ConfigurationProperties(prefix = "spring.data.mongodb.db2")
     public MongoProperties getDb2Props() throws Exception {
         return new MongoProperties();
@@ -39,16 +42,16 @@ public class MultipleMongoConfig {
 
     @Primary
     @Bean
-    public MongoDatabaseFactory db1MongoDatabaseFactory(MongoProperties mongo) throws Exception {
+    public MongoDatabaseFactory db1MongoDatabaseFactory(MongoProperties mongoProperties) throws Exception {
         return new SimpleMongoClientDatabaseFactory(
-                mongo.getUri()
+                mongoProperties.getUri()
         );
     }
 
     @Bean
-    public MongoDatabaseFactory db2MongoDatabaseFactory(MongoProperties mongo) throws Exception {
+    public MongoDatabaseFactory db2MongoDatabaseFactory(MongoProperties mongoProperties) throws Exception {
         return new SimpleMongoClientDatabaseFactory(
-                mongo.getUri()
+                mongoProperties.getUri()
         );
     }
 }
