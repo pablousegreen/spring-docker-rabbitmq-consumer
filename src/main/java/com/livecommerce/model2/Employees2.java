@@ -17,8 +17,8 @@ import javax.persistence.Id;
 public class Employees2 {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String name;
     private String dept;
-    private double salary;
+    private Double salary;
 }

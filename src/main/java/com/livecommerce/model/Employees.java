@@ -18,8 +18,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Employees {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String name;
     private String dept;
-    private double salary;
+    private Double salary;
 }

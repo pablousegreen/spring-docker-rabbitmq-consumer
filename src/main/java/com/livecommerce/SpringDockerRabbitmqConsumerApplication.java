@@ -1,7 +1,7 @@
 package com.livecommerce;
 
 import com.livecommerce.data.dao.EmployeesRepository;
-import com.livecommerce.data.dao2.Employees2Repository;
+import com.livecommerce.data.dao2.EmployeeTwoRepository;
 import com.livecommerce.model.Employees;
 import com.livecommerce.model2.Employees2;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class SpringDockerRabbitmqConsumerApplication implements CommandLineRunne
 	private EmployeesRepository employeesRepository;
 
 	@Autowired
-	private Employees2Repository employees2Repository;
+	private EmployeeTwoRepository employees2Repository;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDockerRabbitmqConsumerApplication.class, args);
 	}
@@ -33,8 +31,8 @@ public class SpringDockerRabbitmqConsumerApplication implements CommandLineRunne
 		log.info("Start creating and printing mongo objects");
 		log.info("************************************************************");
 
-		this.employeesRepository.save(new Employees(1, "Pablo", "IT", 5000));
-		this.employees2Repository.save(new Employees2(2, "Daniel", "IT", 7000));
+		this.employeesRepository.save(new Employees(1, "Pablo", "IT", 5000.00));
+		this.employees2Repository.save(new Employees2(2, "Daniel", "IT", 7000.00));
 
 		List<Employees> model1s = this.employeesRepository.findAll();
 		for (Employees model1obj : model1s) {
