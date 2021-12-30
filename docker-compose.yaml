@@ -11,6 +11,8 @@ services:
       spring.rabbitmq.addresses: rabbitmq
     links:
       - rabbitmq
+    depends_on:
+      - mongodb
   spring-rabbitmq-consumer:   #Consumer
     image: spring-rabbitmq-consumer:v100
     restart: unless-stopped
