@@ -35,12 +35,33 @@ public class EmployeesService {
                 response.setMessage("Data not Posted to DB due to error in convert data, invalid format data");
                 return Either.left(response);
             }
+            //employeesList.forEach(e -> this.employeeRepository.save(e));
             this.employeeRepository.saveAll(employeesList);
             return Either.right(employeesList);
         }catch (Exception e){
             response.setStatusCode(500);
             response.setMessage("Data not Posted to DB due to "+e.getMessage());
-            return Either.left(response);
+                    return Either.left(response);
+        }
+    }
+
+    public Optional<List<Employees>> postingEmployeesOptional(Request input){
+        Response response = new Response();
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            List<Employees> employeesList = mapper.readValue(input.getBody(), new TypeReference<List<Employees>>() {});
+            if(Objects.isNull(employeesList) || employeesList.isEmpty()){
+                response.setStatusCode(500);
+                response.setMessage("Data not Posted to DB due to error in convert data, invalid format data");
+                return Optional.empty();
+            }
+            //employeesList.forEach(e -> this.employeeRepository.save(e));
+            this.employeeRepository.saveAll(employeesList);
+            return Optional.of(employeesList);
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setMessage("Data not Posted to DB due to "+e.getMessage());
+            return Optional.empty();
         }
     }
 
@@ -48,7 +69,7 @@ public class EmployeesService {
         return this.employeeRepository.saveAll(users);
     }
 
-    public Employees getEmployeeById(int id) {
+    public Employees getEmployeeById(String id) {
         return this.employeeRepository.findById(id).orElse(null);
     }
 
@@ -56,7 +77,7 @@ public class EmployeesService {
         return this.employeeRepository.findAll();
     }
 
-    public Employees updateEmployee(Employees employee) {
+    public Optional<Employees> updateEmployee(Employees employee) {
         Employees oldEmployee=null;
         Optional<Employees> optionalEmployee=this.employeeRepository.findById(employee.getId());
         if(optionalEmployee.isPresent()) {
@@ -65,12 +86,12 @@ public class EmployeesService {
             oldEmployee.setSalary(employee.getSalary());
             this.employeeRepository.save(oldEmployee);
         }else {
-            return new Employees();
+            return Optional.empty();
         }
-        return oldEmployee;
+        return Optional.empty();
     }
 
-    public String deleteEmployeeById(int id) {
+    public String deleteEmployeeById(String id) {
         this.employeeRepository.deleteById(id);
         return "User got deleted";
     }

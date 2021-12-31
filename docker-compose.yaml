@@ -13,20 +13,20 @@ services:
       - rabbitmq
     depends_on:
       - mongodb
-  spring-rabbitmq-consumer:   #Consumer
-    image: spring-rabbitmq-consumer:v100
-    restart: unless-stopped
-    build: .
-    ports:
-      - 9002:9002
-    environment:
-      spring.rabbitmq.addresses: rabbitmq
-      spring.data.mongodb.host: mongodb
+  #spring-rabbitmq-consumer:   #Consumer
+  #  image: spring-rabbitmq-consumer:v100
+  #  restart: unless-stopped
+  #  build: .
+  #  ports:
+  #    - 9002:9002
+  #  environment:
+  #    spring.rabbitmq.addresses: rabbitmq
+  #    spring.data.mongodb.host: mongodb
       #mongodb.primary.host: mongodb
-    links:
-      - rabbitmq
-    depends_on:
-      - mongodb
+  #  links:
+  #    - rabbitmq
+  #  depends_on:
+  #    - mongodb
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3-management

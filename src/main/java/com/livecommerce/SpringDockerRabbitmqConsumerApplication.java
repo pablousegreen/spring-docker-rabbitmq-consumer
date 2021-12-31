@@ -31,8 +31,8 @@ public class SpringDockerRabbitmqConsumerApplication implements CommandLineRunne
 		log.info("Start creating and printing mongo objects");
 		log.info("************************************************************");
 
-		this.employeesRepository.save(new Employees(1, "Pablo", "IT", 5000.00));
-		this.employees2Repository.save(new Employees2(2, "Daniel", "IT", 7000.00));
+		/*this.employeesRepository.save(new Employees( "Pablo", "IT", 5000.00));
+		this.employees2Repository.save(new Employees2("Daniel", "IT", 7000.00));
 
 		List<Employees> model1s = this.employeesRepository.findAll();
 		for (Employees model1obj : model1s) {
@@ -43,7 +43,7 @@ public class SpringDockerRabbitmqConsumerApplication implements CommandLineRunne
 		List<Employees2> model2s = this.employees2Repository.findAll();
 		for (Employees2 model2obj : model2s) {
 			log.info(model2obj.toString());
-		}
+		}*/
 
 		log.info("************************************************************");
 		log.info("Ended printing mongo objects");

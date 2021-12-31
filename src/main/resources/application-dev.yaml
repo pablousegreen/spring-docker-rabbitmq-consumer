@@ -17,10 +17,10 @@ spring:
       database2: GrandStoreDB2
       db1:
         #uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database}
-        uri: mongodb://0.0.0.0:27017/GrandStoreDB
+        uri: mongodb://localhost:27017/GrandStoreDB
       db2:
         #uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database2}
-        uri: mongodb://0.0.0.0:27017/GrandStoreDB2
+        uri: mongodb://localhost:27017/GrandStoreDB2
 
   datasource:
     url: jdbc:h2:mem:localGrandStoreDB

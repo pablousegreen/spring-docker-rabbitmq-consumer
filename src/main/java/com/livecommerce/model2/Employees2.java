@@ -6,19 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-@Document(collection="Employees2")
+
 @ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection="Employees2")
 public class Employees2 {
     @Id
-    @GeneratedValue
-    private Integer id;
+    private String id;
     private String name;
     private String dept;
     private Double salary;
+
+    public Employees2(String name, String dept, Double salary){
+        this.name = name;
+        this.dept = dept;
+        this.salary= salary;
+    }
 }

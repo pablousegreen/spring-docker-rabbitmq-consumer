@@ -1,15 +1,14 @@
 package com.livecommerce.api.config;
 
 import com.livecommerce.data.dao2.EmployeeTwoRepository;
-import com.mongodb.MongoClientURI;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-//import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 @Configuration
 @EnableMongoRepositories(basePackageClasses = {EmployeeTwoRepository.class},
@@ -29,6 +28,6 @@ public class SecundaryMongoConfig {
 
     @Bean
     public MongoDatabaseFactory dbTwoMongoDatabaseFactory(MongoProperties mongoProperties) throws Exception {
-        return new SimpleMongoClientDatabaseFactory(new MongoClientURI(getDbTwoProps().getUri()).toString());
+        return new SimpleMongoClientDatabaseFactory(mongoProperties.getUri());
     }
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface EmployeesRepository extends MongoRepository<Employees, Integer> {
+public interface EmployeesRepository extends MongoRepository<Employees, String> {
 
 }

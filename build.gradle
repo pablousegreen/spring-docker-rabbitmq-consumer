@@ -20,10 +20,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
-	implementation 'org.springframework.data:spring-data-mongodb:3.3.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	//implementation 'org.mongodb:mongodb-driver-core:4.0.5'
+	//implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.10'
+	//implementation 'org.springframework.data:spring-data-mongodb:3.3.0'
 	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb
-	implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.3.0'
+	//implementation group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -33,11 +36,6 @@ dependencies {
 	implementation 'io.vavr:vavr:0.10.4'
 	implementation 'com.h2database:h2:1.4.199'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-	// https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
-	implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.10'
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor
-
-
 
 }
 

@@ -38,20 +38,21 @@ public class MessageListener {
 
     @RabbitListener(queues = MQconfig.QUEUE)
     public void listener(CustomMessage message){
-        if(Objects.nonNull(message)) {
-            logger.info("NUll error Message {} message {} "+MQconfig.QUEUE + message);
+        if(Objects.isNull(message)) {
+            logger.info("NUll error Message {} message {} "+MQconfig.QUEUE , message);
+            return;
         }
-        logger.info("Got Message {} message {} "+MQconfig.QUEUE + message);
-        Either<Response, List<Employees>> eitherR = this.employeeService.postingEmployees(message.getMessage());
-        Response responseError = eitherR.getLeft();
-        if(Objects.nonNull(responseError) && Objects.nonNull(responseError.getMessage())){
-            logger.info("Error to save Employees Message {} message {} "+MQconfig.QUEUE + message +" tha was not Saved in DB" +responseError.getMessage());
+        logger.info("Got Message {} message {} "+MQconfig.QUEUE , message);
+        List<Employees> eitherR = this.employeeService.postingEmployeesOptional(message.getMessage()).get();
+        //Response responseError = eitherR.getLeft();
+        if(Objects.nonNull(eitherR) && eitherR.isEmpty()){
+            logger.info("Error to save Employees Message : "+MQconfig.QUEUE + message +" tha was not Saved in DB" );
         }
-        Try<List<Employees>> tryEmployeeList = eitherR.toTry();
+        List<Employees> tryEmployeeList = eitherR;
         if(Objects.isNull(tryEmployeeList) || tryEmployeeList.isEmpty()) {
-            logger.info("We got no response to save Employees Message {} message {} "+MQconfig.QUEUE + message +" tha was not Saved in DB");
+            logger.info("We got no response to save Employees Message {} message {} "+MQconfig.QUEUE + message , " tha was not Saved in DB");
         }
-        logger.info("Employees Message {} message {} " + MQconfig.QUEUE + message + " Saved in DB" + tryEmployeeList);
+        logger.info(" message {} " + MQconfig.QUEUE + message + " Saved in DB" + tryEmployeeList);
     }
 
     /*@RabbitListener(queues = MQconfig.QUEUE)
