@@ -1,16 +1,12 @@
 package com.livecommerce;
 
 import com.livecommerce.data.dao.EmployeesRepository;
-import com.livecommerce.data.dao2.EmployeeTwoRepository;
-import com.livecommerce.model.Employees;
-import com.livecommerce.model2.Employees2;
+import com.livecommerce.data.dao2.EmployeesTwoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
 
 @Slf4j
 @SpringBootApplication
@@ -20,7 +16,7 @@ public class SpringDockerRabbitmqConsumerApplication implements CommandLineRunne
 	private EmployeesRepository employeesRepository;
 
 	@Autowired
-	private EmployeeTwoRepository employees2Repository;
+	private EmployeesTwoRepository employees2Repository;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDockerRabbitmqConsumerApplication.class, args);
 	}

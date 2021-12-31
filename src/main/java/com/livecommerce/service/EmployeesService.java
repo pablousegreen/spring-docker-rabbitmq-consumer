@@ -3,9 +3,11 @@ package com.livecommerce.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.livecommerce.data.dao.EmployeesRepository;
+import com.livecommerce.data.dao2.EmployeesTwoRepository;
 import com.livecommerce.dto.Request;
 import com.livecommerce.dto.Response;
 import com.livecommerce.model.Employees;
+import com.livecommerce.model2.Employees2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,8 @@ public class EmployeesService {
     @Autowired
     private EmployeesRepository employeeRepository;
 
-    /*public EmployeesService(EmployeesRepository employeeRepository){
-        this.employeeRepository = employeeRepository;
-    }*/
+    @Autowired
+    private EmployeesTwoRepository employeeTwoRepository;
 
     public Either<Response, List<Employees>> postingEmployees(Request input){
         Response response = new Response();
@@ -37,6 +38,8 @@ public class EmployeesService {
             }
             //employeesList.forEach(e -> this.employeeRepository.save(e));
             this.employeeRepository.saveAll(employeesList);
+            List<Employees2> employees2List = mapper.readValue(input.getBody(), new TypeReference<List<Employees2>>() {});
+            this.employeeTwoRepository.saveAll(employees2List);
             return Either.right(employeesList);
         }catch (Exception e){
             response.setStatusCode(500);

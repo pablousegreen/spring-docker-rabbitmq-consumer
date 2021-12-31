@@ -40,16 +40,14 @@ public class MessageListener {
     public void listener(CustomMessage message){
         if(Objects.isNull(message)) {
             logger.info("NUll error Message {} message {} "+MQconfig.QUEUE , message);
-            return;
         }
         logger.info("Got Message {} message {} "+MQconfig.QUEUE , message);
-        List<Employees> eitherR = this.employeeService.postingEmployeesOptional(message.getMessage()).get();
-        //Response responseError = eitherR.getLeft();
-        if(Objects.nonNull(eitherR) && eitherR.isEmpty()){
-            logger.info("Error to save Employees Message : "+MQconfig.QUEUE + message +" tha was not Saved in DB" );
-        }
-        List<Employees> tryEmployeeList = eitherR;
-        if(Objects.isNull(tryEmployeeList) || tryEmployeeList.isEmpty()) {
+        Either<Response, List<Employees>> eitherR = this.employeeService.postingEmployees(message.getMessage());
+        Try<List<Employees>> tryEmployeeList = eitherR.toTry();
+        logger.info("We got tryEmployeeList {} ",tryEmployeeList);
+        /*Response responseError = eitherR.getLeft();*/
+        if(Objects.isNull(tryEmployeeList) || Objects.isNull(tryEmployeeList.get())){
+            //logger.info("Error to save Employees Message : "+MQconfig.QUEUE + message +" tha was not Saved in DB" +responseError.getMessage());
             logger.info("We got no response to save Employees Message {} message {} "+MQconfig.QUEUE + message , " tha was not Saved in DB");
         }
         logger.info(" message {} " + MQconfig.QUEUE + message + " Saved in DB" + tryEmployeeList);
